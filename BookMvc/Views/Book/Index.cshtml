@@ -1,0 +1,66 @@
+﻿@model IEnumerable<BookMvc.Models.Bookmvcmodel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<br/>
+<p>
+    Select Operation: <a href="@Url.Action("CreateEdit","Book")" class="btn btn-default">Add new</a>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Author)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ISBN)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Publisher)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Year)
+        </th>
+        <th>Operation</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Author)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ISBN)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Publisher)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Year)
+        </td>
+        <td>
+            <a href="@Url.Action("Edit", "Book", new {Title= item.Title})" class="btn btn-default">Edit</a>
+            <a href="@Url.Action("Delete", "Book", new {Title= item.Title})" class="btn btn-default">Delete</a>
+           
+        </td>
+    </tr>
+}
+</table>
+
+@section scripts{
+    <script>
+        $(function () {
+            var successMessage =@TempData["SuccessMessage"];
+            if (successMessage != '')
+                alertify.success(successMessage);
+        });
+       
+        </script>
+    }
